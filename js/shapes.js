@@ -18,7 +18,12 @@ window.onload = function() {
     // there are six event listeners being added for the staff solutions. you'll have an
     // equivalent set of six event listeners for your solutions. the first one is done for you.
 
-    this.document.getElementById("hello").onclick = sayHello;
+    document.getElementById("hello").onclick = sayHello;
+    document.getElementById("rectangle").onclick = drawRectangle;
+    document.getElementById("colored").onclick = drawColoredRectangle;
+    document.getElementById("traingle").onclick = drawTriangle;
+    document.getElementById("smile").onclick = drawFace;
+    document.getElementById("pyramid").onclick = drawPyramid;
 }
 
 /*
@@ -26,7 +31,14 @@ window.onload = function() {
  */
 
 const sayHello = function() {
-    // write your exercise 1 code here
+    const message = prompt("Message: ");
+    message.style.fontSize = ("48px");
+    message.style.fontFamily = ("sans-serif");
+    message.style.outlineColor = ("black");
+}
+
+
+  
 };
 
 /*
