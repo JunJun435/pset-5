@@ -94,6 +94,7 @@ const drawColoredRectangle = function() {
 
   } while (color != "BLACK" && color != "BLUE" && color != "GREEN" && color != "ORANGE" && color != "PURPLE" && color != "RED" && color != "YELLOW");
 
+
   ctx.fillStyle = color;
   ctx.fillRect(10, 10, 100, 50);
 };
@@ -103,7 +104,12 @@ const drawColoredRectangle = function() {
  */
 
 const drawTriangle = function() {
-    // write your exercise 4 code here
+  const canvas = document.getElementById('student-canvas-5');
+  const ctx = canvas.getContext('2d');
+  ctx.beginPath();
+ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+
+
 };
 
 /*
@@ -111,7 +117,7 @@ const drawTriangle = function() {
  */
 
 const drawFace = function() {
-    // write your exercise 4 code here
+
 };
 
 /*
