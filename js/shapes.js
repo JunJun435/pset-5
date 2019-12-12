@@ -168,7 +168,57 @@ const drawTriangle = function() {
  */
 
 const drawFace = function() {
+  const canvas = document.getElementById('student-canvas-5');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  let head = prompt("Radius: ");
+
+  while (head < 32 || head > (canvas.height / 2) || isNaN(head)) {
+
+    if (head == null) {
+      break;
+    }
+
+    if (isNaN(head)) {
+      alert("Your radius is not a number.");
+    }
+
+    head = Number(head);
+
+    if (head < 32) {
+      alert("Your radius must be at least 32.");
+    }
+
+    if (head > (canvas.height / 2)) {
+      alert("Your smiley face won't fit on canvas.");
+    }
+
+    head = prompt("Radius: ");
+  }
+
+  head = Number(head);
+  let eyes = Number(head * 0.15);
+  let mouth = Number(head * 0.7);
+
+  ctx.beginPath();
+  ctx.arc(512, 256, head, 0, 2 * Math.PI);
+  ctx.closePath();
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(512, 256, mouth, 0, Math.PI);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc((head * 0.4) + 512, 256 - (head * 0.4), eyes, 0, 2 * Math.PI);
+  ctx.closePath();
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(512 - (head * 0.4), 256 - (head * 0.4), eyes, 0, 2 * Math.PI);
+  ctx.closePath();
+  ctx.stroke();
 };
 
 /*
