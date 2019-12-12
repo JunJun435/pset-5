@@ -102,7 +102,7 @@ const drawColoredRectangle = function() {
   do {
     var color = String(prompt("Color: ")).toUpperCase();
 
-    if (color != "BLACK" && color != "BLUE" && color != "GREEN" && color != "ORANGE" && color != "PURPLE" && color != "RED" && color != "YELLOW") {
+    if (color != "BLACK" && color != "BLUE" && color != "GREEN" && color != "ORANGE" && color != "PURPLE" color != "RED" && color != "YELLOW") {
       alert(color + " is not a supported color.");
     }
 
