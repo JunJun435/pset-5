@@ -203,11 +203,56 @@ const drawFace = function() {
     ctx.closePath();
 };
 
-
 /*
  * Exercise 6 (extra credit).
  */
 
 const drawPyramid = function() {
-    // write your exercise 5 code here
+  let canvas = document.getElementById("student-canvas-6");
+  let context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  let sideLength;
+  let status;
+  let test;
+  do {
+    sideLength = Number(window.prompt("Side:"));
+    test = Boolean(sideLength);
+    if (test == false) {
+      status = true;
+    } else if (isNaN(sideLength)) {
+      window.alert("Your block size is not a number.");
+      status = false;
+    } else if (sideLength < 1) {
+      window.alert("Your block size must be at least 1.");
+      status = false;
+    } else if (sideLength > 100) {
+      window.alert("Your pyramid won't fit on the canvas.");
+      status = false;
+    } else {
+      status = true;
+    }
+  } while (status !== true)
+  if (test == false) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  } else {
+    let bottomX = 10;
+    let bottomY = 402;
+    let blocks = 0;
+    let newRow = 0;
+    for (row = 5; row > 0; row = row - 1) {
+      blocks = row;
+      while (blocks >= 1) {
+        context.beginPath();
+        context.rect(bottomX, bottomY, sideLength, sideLength);
+        context.stroke();
+        context.closePath();
+
+        bottomX = bottomX + sideLength;
+        blocks = blocks - 1;
+      }
+      bottomY = bottomY - sideLength;
+      newRow = newRow + 1
+      bottomX = newRow * (sideLength / 2);
+    }
+  }
 };
