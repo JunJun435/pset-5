@@ -99,15 +99,16 @@ const drawColoredRectangle = function() {
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  do {
-    var color = String(prompt("Color: ")).toUpperCase();
+  let color = prompt("Color: ");
+  color = color.toLowerCase().trim();
 
-    if (color != "BLACK" && color != "BLUE" && color != "GREEN" && color != "ORANGE" && color != "PURPLE" color != "RED" && color != "YELLOW") {
-      alert(color + " is not a supported color.");
+  while (color != "black" && color != "blue" && color != "green" && color != "orange" && color != "purple" && color != "red" && color != "yellow") {
+    if (color == null) {
+      break;
     }
-
-  } while (color != "BLACK" && color != "BLUE" && color != "GREEN" && color != "ORANGE" && color != "PURPLE" && color != "RED" && color != "YELLOW");
-
+    alert(color + " is not a supported color.");
+    color = prompt("Color: ");
+  }
 
   ctx.fillStyle = color;
   ctx.fillRect(10, 10, 100, 50);
