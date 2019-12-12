@@ -28,6 +28,26 @@ window.onload = function() {
 
  //Exercise 1.
 
+const sayHello = function() {
+  const canvas = document.getElementById('student-canvas-1');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  do {
+    var message = prompt("Message: ");
+
+    if (message.length > 50) {
+      alert("Your message is too long. Keep it under 50 characters.");
+    }
+
+  } while (message.length > 50);
+
+  ctx.font = '48px sans-serif';
+  ctx.strokeText(message, 30, 70);
+};
+
+//Exercise 2
+
 const drawRectangle = function() {
   let canvas = document.getElementById("student-canvas-2");
   let context = canvas.getContext("2d");
