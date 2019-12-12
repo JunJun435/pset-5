@@ -50,52 +50,42 @@ const sayHello = function() {
 
 const drawRectangle = function() {
   let canvas = document.getElementById("student-canvas-2");
-  let context = canvas.getContext("2d");
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  let width = 0;
-  let height = 0;
-  let x = 0;
-  let y = 0;
-  let status;
-  do {
-    status = true;
-    width = Number(window.prompt("Width:"));
-    height = Number(window.prompt("Height:"));
-    x = Number(window.prompt("X:"));
-    y = Number(window.prompt("Y:"));
-    let test1 = Boolean(width);
-    let test2 = Boolean(height);
-    let test3 = Boolean(x);
-    let test4 = Boolean(y)
-    if (test1 == false && test2 == false && test3 == false && test4 == false) {
-      status = true;
-    } else if ((!Number.NaN && width < 1) || (!Number.NaN && width > canvas.width)) {
-      window.alert("Your width must be between 1 and 1024.");
-      status = false;
-    } else if ((!Number.isNaN && !(height >= 1)) || (!Number.isNaN && !(height <= canvas.height))) {
-      window.alert("Your height must be between 1 and 512.");
-      status = false;
-    } else if ((!Number.isNaN && !(x >= 1)) || (!Number.isNaN && !(x <= canvas.width))) {
-      window.alert("Your x coordinate must be between 1 and 1024.");
-      status = false;
-    } else if ((!Number.isNaN && !(y >= 1)) || (!Number.isNaN && !(y <= canvas.height))) {
-      window.alert("Your y coordinate must be between 1 and 512.");
-      status = false;
-    } else {
-      status = true;
-    }
-  } while (status == false);
-  let test1 = Boolean(width);
-  let test2 = Boolean(height);
-  let test3 = Boolean(x);
-  let test4 = Boolean(y);
-  if (test1 == false && test2 == false && test3 == false && test4 == false) {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-  } else {
-    context.strokeRect(x, y, width, height);
-  }
-};
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
+  let width = prompt("Width: ");
+  let height = prompt("Height: ");
+  let x = prompt("X: ");
+  let y = prompt("Y: ");
 
+  while (isNaN(width) || width < 1 || width > 1024 || isNaN(height) || height < 1 || height > 512 || isNaN(x) || x < 1 || x >= 1024 || isNaN(y) || y < 1 || y >= 512 ||  x > 1024 - width || y > 512 -  height) {
+    if (x == null || y == null || width == null || height == null) {
+      ctx.clearRect(0, 0, 1024, 512);
+      return;
+    }
+    if (isNaN(width) || width < 1 || width > 1024){
+      alert("Your width must be between 1 and 1024.");
+    }
+    if (isNaN(height) || height < 1 || height > 512){
+      alert("Your height must be between 1 and 512.");
+    }
+    if (isNaN(x) || x < 1 || x > 1024){
+      alert("Your X is invaid.");
+    }
+    if (isNaN(y) || y < 1 || y > 512){
+      alert("Your Y is invaid.");
+    }
+    if ( x > 1024 - width || y > 512 -  height){
+      alert("Your rectangle is out of the bounds of the canvas.");
+    }
+
+   width = prompt("Width: ");
+   height = prompt("Height: ");
+   x = prompt("X: ");
+   y = prompt("Y: ");
+ }
+  ctx.strokeRect( x, y, width, height);
+};
+// Something is wrong
 /*
  * Exercise 3.
  */
@@ -169,7 +159,6 @@ const drawTriangle = function() {
     }
 
   };
-
 /*
  * Exercise 5.
  */
@@ -218,6 +207,7 @@ const drawFace = function() {
     ctx.stroke();
     ctx.closePath();
 };
+
 
 /*
  * Exercise 6 (extra credit).
