@@ -226,20 +226,43 @@ const drawFace = function() {
  */
 
 const drawPyramid = function() {
-  const canvas = document.getElementById('student-canvas-3');
+  const canvas = document.getElementById('student-canvas-6');
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  var distance = 0
+  var height = 0
+  var row = 0
+  var column = 0
+  var counter = 5
+
   do {
     var block = prompt("Side: ");
+
     if (block < 1) {
       alert("Your block size must be at least 1.");
     } else if (block > canvas.height || block > canvas.width){
       alert("Your pyramid won't fit on canvas.");
-    } else {
-      alert("Your block size is not a number.")
+    } else if (isNaN(block)){
+      alert("Your block size is not a number.");
     }
 
   } while (block < 1 || block > canvas.height || block > canvas.width || isNaN(block));
+
+  for (i = 5; i > 0; i--) {
+    counter = i
+    while(counter >= 1) {
+      ctx.beginPath();
+      ctx.rect(10 + Number(distance), (502 - block) - Number(height), Number(block), Number(block));
+      ctx.stroke();
+      ctx.closePath();
+      distance = Number(distance) + Number(block);
+      counter--;
+    }
+    row++;
+    distance = row * (1/2 * block);
+    column++;
+    height = column * block;
+  }
 
 };
