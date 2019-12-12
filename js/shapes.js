@@ -18,36 +18,31 @@ window.onload = function() {
     // there are six event listeners being added for the staff solutions. you'll have an
     // equivalent set of six event listeners for your solutions. the first one is done for you.
 
-    document.getElementById("hello").onclick = sayHello;
-    document.getElementById("rectangle").onclick = drawRectangle;
-    document.getElementById("color").onClick = drawColoredRectangle;
-    document.getElementById("triangle").onClick = drawTriangle;
-    document.getElementById("smile").onClick = drawFace;
-    document.getElementById("pyramid").onClick = drawPyramid;
+    this.document.getElementById("hello").onclick = sayHello;
+    this.document.getElementById("rectangle").onclick = drawRectangle;
+    this.document.getElementById("color").onclick = drawColoredRectangle;
+    this.document.getElementById("triangle").onclick = drawTriangle;
+    this.document.getElementById("face").onclick = drawFace;
 }
 
- //Exercise 1.
-
+/*
+ * Exercise 1.
+ */
 const sayHello = function() {
-  const canvas = document.getElementById('student-canvas-1');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  do {
-    var message = prompt("Message: ");
-
-    if (message.length > 50) {
-      alert("Your message is too long. Keep it under 50 characters.");
-    }
-
-  } while (message.length > 50);
-
-  ctx.font = '48px sans-serif';
-  ctx.strokeText(message, 30, 70);
+  let canvas = document.getElementById("student-canvas-1");
+  let ctx = canvas.getContext('2d');
+   ctx.clearRect(0, 0, 1024, 128);
+  let message = prompt("Message: ");
+  while (message.length > 50){
+    alert("Your message is too long. Keep it under 50 characters.");
+    message = prompt("Message: ");
+  }
+   ctx.font = '48px sans-serif';
+   ctx.strokeText(message, 30, 70, 994);
 };
-
-//Exercise 2
-
+/*
+ * Exercise 2.
+ */
 const drawRectangle = function() {
   let canvas = document.getElementById("student-canvas-2");
   let ctx = canvas.getContext('2d');
@@ -85,7 +80,7 @@ const drawRectangle = function() {
  }
   ctx.strokeRect( x, y, width, height);
 };
-
+// Something is wrong
 /*
  * Exercise 3.
  */
@@ -159,7 +154,6 @@ const drawTriangle = function() {
     }
 
   };
-
 /*
  * Exercise 5.
  */
@@ -207,4 +201,13 @@ const drawFace = function() {
     ctx.arc(512 + (0.4 * radius), 256 - (0.4 * radius), eyes, 0, (2 * Math.PI));
     ctx.stroke();
     ctx.closePath();
+};
+
+
+/*
+ * Exercise 6 (extra credit).
+ */
+
+const drawPyramid = function() {
+    // write your exercise 5 code here
 };
