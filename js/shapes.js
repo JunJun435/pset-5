@@ -28,68 +28,54 @@ window.onload = function() {
 
  //Exercise 1.
 
-const sayHello = function() {
-  const canvas = document.getElementById('student-canvas-1');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  do {
-    var message = prompt("Message: ");
-
-    if (message.length > 50) {
-      alert("Your message is too long. Keep it under 50 characters.");
-    }
-
-  } while (message.length > 50);
-
-  ctx.font = '48px sans-serif';
-  ctx.strokeText(message, 30, 70);
-};
-
-//Exercise 2
-
 const drawRectangle = function() {
-  const canvas = document.getElementById('student-canvas-2');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+  let canvas = document.getElementById("student-canvas-2");
+  let context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  let width = 0;
+  let height = 0;
+  let x = 0;
+  let y = 0;
+  let status;
   do {
-
-    var width = prompt("Width: ");
-    var height = prompt("Height: ");
-    var x = prompt("X: ");
-    var y = prompt("Y: ");
-
-    if (width > 1024 || width < 1) {
-        if (width == null) {
-          break;
-        }
-        alert("Your width must be between 1 and 1024.");
-      } else if (height > 512 || height < 1) {
-        if (height == null) {
-           break;
-         }
-        alert("Your height must be between 1 and 512.");
-      } else if (x > 1024 || x < 1) {
-        if (x == null) {
-           break;
-        }
-        alert("Your x-coordinate must be between 1 and 1024.");
-      } else if (y > 512 || y < 1) {
-        if (y == null) {
-          break;
-        }
-        alert("Your y-coordinate must be between 1 and 512.");
-      } else if (isNaN(width) || isNaN(height) || isNaN(x) || isNaN(y)){
-        alert("One of your values is not a number.");
-      } else if (x + width > 1024 || y + height > 512) {
-        alert("Your rectangle won't fit on canvas.")
-      }
-
-  } while(width < 1 || width > 1024 || height < 1 || height > 512 || x < 1 || y < 1 || x > 1024 || y > 512 || isNaN(width) || isNaN(height) || isNaN(x) || isNaN(y) || x + width > 1024 || y + height > 512);
-
-  ctx.strokeRect(x, y, width, height);
+    status = true;
+    width = Number(window.prompt("Width:"));
+    height = Number(window.prompt("Height:"));
+    x = Number(window.prompt("X:"));
+    y = Number(window.prompt("Y:"));
+    let test1 = Boolean(width);
+    let test2 = Boolean(height);
+    let test3 = Boolean(x);
+    let test4 = Boolean(y)
+    if (test1 == false && test2 == false && test3 == false && test4 == false) {
+      status = true;
+    } else if ((!Number.NaN && width < 1) || (!Number.NaN && width > canvas.width)) {
+      window.alert("Your width must be between 1 and 1024.");
+      status = false;
+    } else if ((!Number.isNaN && !(height >= 1)) || (!Number.isNaN && !(height <= canvas.height))) {
+      window.alert("Your height must be between 1 and 512.");
+      status = false;
+    } else if ((!Number.isNaN && !(x >= 1)) || (!Number.isNaN && !(x <= canvas.width))) {
+      window.alert("Your x coordinate must be between 1 and 1024.");
+      status = false;
+    } else if ((!Number.isNaN && !(y >= 1)) || (!Number.isNaN && !(y <= canvas.height))) {
+      window.alert("Your y coordinate must be between 1 and 512.");
+      status = false;
+    } else {
+      status = true;
+    }
+  } while (status == false);
+  let test1 = Boolean(width);
+  let test2 = Boolean(height);
+  let test3 = Boolean(x);
+  let test4 = Boolean(y);
+  if (test1 == false && test2 == false && test3 == false && test4 == false) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  } else {
+    context.strokeRect(x, y, width, height);
+  }
 };
+
 /*
  * Exercise 3.
  */
