@@ -57,8 +57,8 @@ const drawRectangle = function() {
 
     var width = prompt("Width: ");
     var height = prompt("Height: ");
-    var x = prompt("X-coordinate: ");
-    var y = prompt("Y-coordinate: ");
+    var x = prompt("X: ");
+    var y = prompt("Y: ");
 
     if (width > 1024 || width < 1) {
         if (width == null) {
