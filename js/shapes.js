@@ -113,48 +113,74 @@ const drawColoredRectangle = function() {
  */
 
 const drawTriangle = function() {
-  const canvas = document.getElementById('student-canvas-4');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  let side1 = Number(prompt("Side 1: "));
-  let side2 = Number(prompt("Side 2: "));
-  let side3 = Number(prompt("Side 3: "));
-
-  let height = Math.min(side1, side2, side3);
-  let hypotenuse = Math.max(side1, side2, side3);
-  let base = Math.sqrt((hypotenuse*hypotenuse) - (height*height));
-
-  while (((height*height) != (hypotenuse*hypotenuse) - (base*base)) || height > 512 || height < 1 || base > 1024 || base < 1 || hypotenuse < 1 || isNaN(side1) || isNaN(side2) || isNaN(side3)) {
-
-    if (side1 == 0 && side2 == 0 && side3 == 0) {
-      break;
+  let canvas = document.getElementById("student-canvas-4");
+  let context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  let side1 = 0;
+  let side2 = 0;
+  let side3 = 0;
+  let height = 0;
+  let hypotenuse = 0;
+  let base = 0;
+  let check = 0;
+  let status;
+  do {
+    side1 = Number(window.prompt("Side 1:"));
+    side2 = Number(window.prompt("Side 2:"));
+    side3 = Number(window.prompt("Side 3:"));
+    status;
+    let test1 = Boolean(side1);
+    let test2 = Boolean(side2);
+    let test3 = Boolean(side3);
+    if (test1 == false && test2 == false && test3 == false) {
+      status = true;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    } else {
+      status = true;
+      if (Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3)) {
+        window.alert("One of your sides is not a number.");
+        status = false;
+      }
+      hypotenuse = Math.max(side1, side2, side3);
+      height = Math.min(side1, side2, side3);
+      if ((side1 == hypotenuse && side2 == height) || (side1 == height && side2 == hypotenuse)) {
+        base = side3
+      }
+      if ((side2 == hypotenuse && side3 == height) || (side2 == height && side3 == hypotenuse)) {
+        base = side1
+      }
+      if ((side1 == hypotenuse && side3 == height) || (side1 == height && side3 == hypotenuse)) {
+        base = side2
+      }
+      check = Math.hypot(height, base);
+      if (check !== hypotenuse && status == true) {
+        window.alert("That's not a valid right triangle.");
+        status = false;
+      } else if (height > canvas.height || base > canvas.width && status == true) {
+        window.alert("Your triangle won't fit on the canvas.");
+      } else {
+        status = true;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }
     }
-
-    if (isNaN(side1) || isNaN(side2) || isNaN(side3)) {
-      alert("One of your sides is not a number.");
-    } else if (base > 1024 || height > 512 || hypotenuse > 1144) {
-      alert("Your triangle won't fit on the canvas.");
-    } else if ((hypotenuse*hypotenuse) != (height*height) + (base*base) || base == 0 || height == 0 || hypotenuse == 0  || side1 + side2 + side3 - hypotenuse - height != base) {
-      alert("That's not a valid right triangle.");
-    }
-
-    side1 = Number(prompt("Side 1: "));
-    side2 = Number(prompt("Side 2: "));
-    side3 = Number(prompt("Side 3: "));
-
+  } while (Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3) || check !== hypotenuse || height > canvas.height || base > canvas.width || status == false);
+  let heightPoint = height + 25;
+  let basePoint = base + 25;
+  let test1 = Boolean(side1);
+  let test2 = Boolean(side2);
+  let test3 = Boolean(side3);
+  if (test1 == false && test2 == false && test3 == false) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  } else {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.moveTo(25, 25);
+    context.lineTo(25, heightPoint);
+    context.lineTo(basePoint, heightPoint);
+    context.closePath();
+    context.stroke();
   }
-
-  if (((height*height) == (hypotenuse*hypotenuse) - (base*base)) && base <= 1024 && height <= 512 && hypotenuse <= 1144 && height > 0 && base > 0 && hypotenuse > 0) {
-    ctx.beginPath();
-    ctx.moveTo(25, 25);
-    ctx.lineTo(25, height + 25);
-    ctx.lineTo(base + 25, height + 25);
-    ctx.closePath();
-    ctx.stroke();
-  }
-
 };
+
 /*
  * Exercise 5.
  */
