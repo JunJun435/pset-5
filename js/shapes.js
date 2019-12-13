@@ -82,7 +82,7 @@ const drawRectangle = function() {
  }
   ctx.strokeRect( x, y, width, height);
 };
-// Something is wrong
+
 /*
  * Exercise 3.
  */
@@ -113,49 +113,48 @@ const drawColoredRectangle = function() {
  */
 
 const drawTriangle = function() {
-  let canvas = document.getElementById("student-canvas-4");
-    let ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, 1024, 512);
+  const canvas = document.getElementById('student-canvas-4');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let sideOne = prompt("Side 1: ");
-    let sideTwo = prompt("Side 2: ");
-    let sideThree = prompt("Side 3: ");
+  let side1 = Number(prompt("Side 1: "));
+  let side2 = Number(prompt("Side 2: "));
+  let side3 = Number(prompt("Side 3: "));
 
-    while ( isNaN(sideOne) || sideOne > 1024 || sideOne < 1 || isNaN(sideTwo) ||  sideTwo > 1024 || sideTwo< 1 || isNaN(sideThree) || sideThree > 1024 || sideThree< 1){
+  let height = Math.min(side1, side2, side3);
+  let hypotenuse = Math.max(side1, side2, side3);
+  let base = Math.sqrt((hypotenuse*hypotenuse) - (height*height));
 
-        if (sideOne == null || sideTwo == null || sideThree == null) {
-          ctx.clearRect(0, 0, 1024, 512);
-          return;
-        }
-        if (isNaN(sideOne) || isNaN(sideTwo) || isNaN(sideThree)){
-          alert("One of your sides is not a number.")
-        } else {
-          alert("One of your sides is invalid.")
-        }
-        sideOne = prompt("Side 1: ");
-        sideTwo = prompt("Side 2: ");
-        sideThree = prompt("Side 3: ");
-      }
+  while (((height*height) != (hypotenuse*hypotenuse) - (base*base)) || height > 512 || height < 1 || base > 1024 || base < 1 || hypotenuse < 1 || isNaN(side1) || isNaN(side2) || isNaN(side3)) {
 
-   let hypotenuse = Math.max(sideOne , sideTwo , sideThree);
-   let height = Math.min(sideOne , sideTwo , sideThree);
-   let base = Math.sqrt((hypotenuse * hypotenuse) - (height * height))
-
-    if ( base > 1024 || height > 512 || hypotenuse > 1144 ){
-      alert("Your triangle won't fit on the canvas")
-    }
-    if ((height ** 2) + (base ** 2) == (hypotenuse ** 2)) {
-      ctx.beginPath();
-      ctx.moveTo(25, 25);
-      ctx.lineTo(25, height + 25);
-      ctx.lineTo(base + 25, height + 25);
-      ctx.closePath();
-      ctx.stroke();
-    } else {
-      alert("That's not a valid right triangle.")
+    if (side1 == 0 && side2 == 0 && side3 == 0) {
+      break;
     }
 
-  };
+    if (isNaN(side1) || isNaN(side2) || isNaN(side3)) {
+      alert("One of your sides is not a number.");
+    } else if (base > 1024 || height > 512 || hypotenuse > 1144) {
+      alert("Your triangle won't fit on the canvas.");
+    } else if ((hypotenuse*hypotenuse) != (height*height) + (base*base) || base == 0 || height == 0 || hypotenuse == 0  || side1 + side2 + side3 - hypotenuse - height != base) {
+      alert("That's not a valid right triangle.");
+    }
+
+    side1 = Number(prompt("Side 1: "));
+    side2 = Number(prompt("Side 2: "));
+    side3 = Number(prompt("Side 3: "));
+
+  }
+
+  if (((height*height) == (hypotenuse*hypotenuse) - (base*base)) && base <= 1024 && height <= 512 && hypotenuse <= 1144 && height > 0 && base > 0 && hypotenuse > 0) {
+    ctx.beginPath();
+    ctx.moveTo(25, 25);
+    ctx.lineTo(25, height + 25);
+    ctx.lineTo(base + 25, height + 25);
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+};
 /*
  * Exercise 5.
  */
