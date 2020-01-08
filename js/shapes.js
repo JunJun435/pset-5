@@ -46,41 +46,40 @@ const sayHello = function() {
  * Exercise 2.
  */
 const drawRectangle = function() {
-  let canvas = document.getElementById("student-canvas-2");
-  let ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, 1024, 512);
-  let width = prompt("Width: ");
-  let height = prompt("Height: ");
-  let x = prompt("X: ");
-  let y = prompt("Y: ");
+  const canvas = document.getElementById('student-canvas-2');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  while (isNaN(width) || width < 1 || width > 1024 || isNaN(height) || height < 1 || height > 512 || isNaN(x) || x < 1 || x >= 1024 || isNaN(y) || y < 1 || y >= 512 ||  x > 1024 - width || y > 512 -  height) {
-    if (x == null || y == null || width == null || height == null) {
-      ctx.clearRect(0, 0, 1024, 512);
-      return;
+  do {
+
+    var width = prompt("Width: ");
+    var height = prompt("Height: ");
+    var x = prompt("X-coordinate: ");
+    var y = prompt("Y-coordinate: ");
+
+
+    if (width == null || height == null || x == null || y == null) {
+      break;
     }
-    if (isNaN(width) || width < 1 || width > 1024){
-      alert("Your width must be between 1 and 1024.");
-    }
-    if (isNaN(height) || height < 1 || height > 512){
-      alert("Your height must be between 1 and 512.");
-    }
-    if (isNaN(x) || x < 1 || x > 1024){
-      alert("Your X is invaid.");
-    }
-    if (isNaN(y) || y < 1 || y > 512){
-      alert("Your Y is invaid.");
-    }
-    if ( x > 1024 - width || y > 512 -  height){
-      alert("Your rectangle is out of the bounds of the canvas.");
+    if (width > 1024 || width < 1) {
+        alert("Your width must be between 1 and 1024.");
+    } else if (height > 512 || height < 1) {
+        alert("Your height must be between 1 and 512.");
+    } else if (x > 1024 || x < 1) {
+        alert("Your x-coordinate must be between 1 and 1024.");
+    } else if (y > 512 || y < 1) {
+        alert("Your y-coordinate must be between 1 and 512.");
+    } else if (isNaN(width) || isNaN(height) || isNaN(x) || isNaN(y)){
+        alert("One of your values is not a number.");
+    } else if (Number(x) + Number(width) > 1024 || Number(y) + Number(height) > 512) {
+        alert("Your rectangle won't fit on canvas.")
     }
 
-   width = prompt("Width: ");
-   height = prompt("Height: ");
-   x = prompt("X: ");
-   y = prompt("Y: ");
- }
-  ctx.strokeRect( x, y, width, height);
+  } while(width < 1 || width > 1024 || height < 1 || height > 512 || x < 1 || y < 1 || x > 1024 || y > 512 || isNaN(width) || isNaN(height) || isNaN(x) || isNaN(y) || Number(x) + Number(width) > 1024 || Number(y) + Number(height) > 512);
+
+  if (!(width == null) && !(height == null) && !(x == null) && !(y == null)) {
+    ctx.strokeRect(x, y, width, height);
+  }
 };
 
 /*
@@ -235,51 +234,43 @@ const drawFace = function() {
  */
 
 const drawPyramid = function() {
-  let canvas = document.getElementById("student-canvas-6");
-  let context = canvas.getContext("2d");
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  let sideLength;
-  let status;
-  let test;
-  do {
-    sideLength = Number(window.prompt("Side:"));
-    test = Boolean(sideLength);
-    if (test == false) {
-      status = true;
-    } else if (isNaN(sideLength)) {
-      window.alert("Your block size is not a number.");
-      status = false;
-    } else if (sideLength < 1) {
-      window.alert("Your block size must be at least 1.");
-      status = false;
-    } else if (sideLength > 100) {
-      window.alert("Your pyramid won't fit on the canvas.");
-      status = false;
-    } else {
-      status = true;
-    }
-  } while (status !== true)
-  if (test == false) {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-  } else {
-    let bottomX = 10;
-    let bottomY = 402;
-    let blocks = 0;
-    let newRow = 0;
-    for (row = 5; row > 0; row = row - 1) {
-      blocks = row;
-      while (blocks >= 1) {
-        context.beginPath();
-        context.rect(bottomX, bottomY, sideLength, sideLength);
-        context.stroke();
-        context.closePath();
+  const canvas = document.getElementById('student-canvas-6');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        bottomX = bottomX + sideLength;
-        blocks = blocks - 1;
-      }
-      bottomY = bottomY - sideLength;
-      newRow = newRow + 1
-      bottomX = newRow * (sideLength / 2);
+  var distance = 0
+  var height = 0
+  var row = 0
+  var column = 0
+  var counter = 5
+
+  do {
+    var block = prompt("Side: ");
+
+    if (block < 1) {
+      alert("Your block size must be at least 1.");
+    } else if (block > canvas.height || block > canvas.width){
+      alert("Your pyramid won't fit on the canvas.");
+    } else if (isNaN(block)){
+      alert("Your block size is not a number.");
     }
+
+  } while (block < 1 || block > canvas.height || block > canvas.width || isNaN(block));
+
+  for (i = 5; i > 0; i--) {
+    counter = i
+    while(counter >= 1) {
+      ctx.beginPath();
+      ctx.rect(10 + Number(distance), (502 - block) - Number(height), Number(block), Number(block));
+      ctx.stroke();
+      ctx.closePath();
+      distance = Number(distance) + Number(block);
+      counter--;
+    }
+    row++;
+    distance = row * (1/2 * block);
+    column++;
+    height = column * block;
   }
+
 };
